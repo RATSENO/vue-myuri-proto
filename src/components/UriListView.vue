@@ -1,7 +1,7 @@
 <template>
   <span>
     <div v-for="(item, index) in list" v-bind:key="index">
-      <uri-item-view v-bind:uriItem="item"></uri-item-view>
+      <uri-item-view v-bind:uriItem="{uri:item,index:index}"></uri-item-view>
     </div>
   </span>
 </template>
@@ -18,9 +18,13 @@ export default {
   },
   created(){
     EventBus.$on('render-uri-list', (payload)=>{
-      console.log(`EventBus $on payload = ${payload}`)
+      console.log(`EventBus $on render-uri-list payload = ${payload}`)
       this.list = payload
-    })
+    }),
+    EventBus.$on('delete-uri-item', (payload)=>{
+      console.log(`EventBus $on delete-uri-item payload = ${payload}`)
+      this.list.splice(payload, 1)
+    })    
   },
   components: {
     UriItemView

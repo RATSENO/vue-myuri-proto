@@ -10,8 +10,14 @@
     >
         <b-form-input id="uri-input-text" v-model="uriText" :state="state" trim></b-form-input>
     </b-form-group>
-    <b-button type="submit" variant="primary">Submit</b-button>
-    <b-button type="reset" variant="danger">Reset</b-button>
+    <div class="row row-cols-2">
+      <div class="col">
+        <b-button type="submit" variant="primary">Submit</b-button>
+      </div>
+      <div class="col">
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </div>
+    </div>
   </b-form>
 </template>
 
@@ -31,7 +37,6 @@ import EventBus from '../EventBus/index.js'
             evt.preventDefault()
             console.log(this);
             if(this.validUriInputText(this.uriText)){
-              alert(this.uriText)
               this.savedUriTextList.push(this.uriText)
               this.uriText = ''
               console.log(`EventBus $emit payload = ${this.savedUriTextList}`)
